@@ -218,5 +218,6 @@ void setup()
 
 void loop() 
 {
+  //Remove any old clients to improve performance
   ws.cleanupClients(); 
 }
