@@ -1,4 +1,3 @@
-
 #include <Arduino.h>
 
 const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
@@ -29,7 +28,7 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
       color:blue;
     }
     .button {
-      background-color:black;
+      background-color:white;
       border-radius:25%;
       box-shadow: 5px 5px #888888;
     }
@@ -78,9 +77,9 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
     </script>
 
   </head>
-  <body class="noselect" align="center" style="background-color:white">
+  <body class="noselect" align="center" style="background-color:purple">
      
-    <h1 style="color: purple;text-align:center;">Purple Fire Fighter</h1>
+    <h1 style="color: black;text-align:center;">Purple Fire Fighter</h1>
     <h2 style="color: black;text-align:center;">Wi-Fi &#128658; Control</h2>
     
     <table id="mainTable" style="width:400px;margin:auto;table-layout:fixed" CELLSPACING=10>
@@ -122,7 +121,7 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
 
         <tr>
             <td onmousedown='onTouchStartAndEnd("10")' ontouchstart='onTouchStartAndEnd("10")' class="button"><span class="waterSymbols" >ON</span></td>
-            <td></td>
+            <td onmousedown='onTouchStartAndEnd("0")' ontouchstart='onTouchStartAndEnd("0")' class="button"><span style="font-size:70px; color:red;">&#9888;</span></td>
             <td onmousedown='onTouchStartAndEnd("11")' ontouchstart='onTouchStartAndEnd("11")' class="button"><span class="waterSymbols" >OFF</span></td>
         </tr>
 

@@ -100,7 +100,7 @@ void processMovementCommand(String inputValue)
   {
 
       case STOP_ALL:
-        handleForward();                       
+        handleStopAll();                       
       break;
 
     case FORWARD:
