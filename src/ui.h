@@ -78,10 +78,10 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
     </script>
 
   </head>
-  <body class="noselect" align="center" style="background-color:white">
+  <body class="noselect" align="center" style="background-color:purple">
      
-    <h1 style="color: purple;text-align:center;">Purple Fire Fighter</h1>
-    <h2 style="color: black;text-align:center;">Wi-Fi &#128658; Control</h2>
+    <h1 style="color: black;text-align:center;">Purple Fire Fighter</h1>
+    <h2 style="color: black;text-align:center;">&#128658; Wi-Fi Control</h2>
     
     <table id="mainTable" style="width:400px;margin:auto;table-layout:fixed" CELLSPACING=10>
         <tr>

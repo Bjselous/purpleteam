@@ -22,3 +22,9 @@ const char * networkPswd = "1qaz2wsx";
 //LED
 const int REDLED_PIN = 27;
 const int GREENLED_PIN = 26;
+
+const int FWD_LED_PIN = 32;
+const int RVS_LED_PIN = 33;
+const int WATER_LED_PIN = 12;
+
+bool fwd = false;

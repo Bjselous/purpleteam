@@ -2,16 +2,20 @@
 
 void handleForward()
 {
+  digitalWrite(FWD_LED_PIN, HIGH);
   Serial.println("Forward");
 }
 
 void handleReverse()
 {
+  digitalWrite(RVS_LED_PIN, HIGH);
   Serial.println("Reverse");
 }
 
 void handleStopAcceleration()
 {
+   digitalWrite(RVS_LED_PIN, LOW);
+   digitalWrite(FWD_LED_PIN, LOW);
   Serial.println("Stop Acceleration");
 }
 
@@ -47,12 +51,14 @@ void handleStopTurretTraverseChange()
 
 void handleWaterStart()
 {
+  digitalWrite(WATER_LED_PIN, HIGH);
   Serial.println("Water Start");
 }
 
 void handleWaterStop()
 {
-  Serial.println("Water Stop");
+   digitalWrite(WATER_LED_PIN, LOW);
+    Serial.println("Water Stop");
 }
 
 void handleStopAll()

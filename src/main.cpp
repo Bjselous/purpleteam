@@ -41,9 +41,9 @@ void connectToWiFi(const char * ssid, const char * pwd)
   {
     // Blink LED while we're connecting:
     digitalWrite(GREENLED_PIN, HIGH);
-    delay(1000);
+    delay(500);
     digitalWrite(GREENLED_PIN, LOW);
-    delay(1000);
+    delay(500);
     Serial.println(WiFi.status());
     connectionAttemptCycles++;
 
@@ -60,18 +60,8 @@ void connectToWiFi(const char * ssid, const char * pwd)
     }
   }
 
+  digitalWrite(GREENLED_PIN, HIGH);
   digitalWrite(REDLED_PIN, LOW);
-  digitalWrite(GREENLED_PIN, HIGH);
-  delay(250);
-  digitalWrite(GREENLED_PIN, LOW);
-  delay(250);
-  digitalWrite(GREENLED_PIN, HIGH);
-  delay(250);
-  digitalWrite(GREENLED_PIN, LOW);
-  delay(250);
-  digitalWrite(GREENLED_PIN, HIGH);
-  delay(250);
-  digitalWrite(GREENLED_PIN, LOW);
 
   Serial.println();
   Serial.println("WiFi connected!");
@@ -100,7 +90,7 @@ void processMovementCommand(String inputValue)
   {
 
       case STOP_ALL:
-        handleForward();                       
+        handleStopAll();                       
       break;
 
     case FORWARD:
@@ -191,14 +181,16 @@ void setup()
 
   pinMode(REDLED_PIN, OUTPUT);
   pinMode(GREENLED_PIN, OUTPUT);
+  pinMode(FWD_LED_PIN, OUTPUT);
+  pinMode(RVS_LED_PIN, OUTPUT);
+  pinMode(WATER_LED_PIN, OUTPUT);
+  
 
   Serial.begin(115200); // Starts the serial communication // Setup serial object and define transmission speed
   Serial.println("");
   Serial.println("");// Clear some space in serial monitor
 
-  //Red LED on so know there is power
-  digitalWrite(REDLED_PIN, HIGH);
-
+   
   // Connect to the WiFi network (see function below loop)
   connectToWiFi(networkName, networkPswd);
   
@@ -209,15 +201,23 @@ void setup()
   
   ws.onEvent(onWebSocketEvent);
   server.addHandler(&ws);
-  
+ 
 
   server.begin();
   Serial.println("HTTP server started");
   Serial.println("Setup() Complete");
 }
 
+
+
 void loop() 
 {
   //Remove any old clients to improve performance
-  ws.cleanupClients(); 
+  //ws.cleanupClients(); 
+
+  if(fwd)
+  {    
+    Serial.println("fwd in main loops");
+   digitalWrite(FWD_LED_PIN, HIGH);
+  }
 }
