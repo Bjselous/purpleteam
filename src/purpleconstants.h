@@ -1,3 +1,6 @@
+#ifndef PURPLE_CONSTANTS
+#define PURPLE_CONSTANTS
+
 #define STOP_ALL 0
 
 #define FORWARD 1
@@ -23,8 +26,10 @@ const char * networkPswd = "1qaz2wsx";
 const int REDLED_PIN = 27;
 const int GREENLED_PIN = 26;
 
-const int FWD_LED_PIN = 32;
-const int RVS_LED_PIN = 33;
+const int SERVO_ELEVATION_PIN = 33;
+const int SERVO_TRAVERSE_PIN = 32;
 const int WATER_LED_PIN = 12;
 
 bool fwd = false;
+
+#endif

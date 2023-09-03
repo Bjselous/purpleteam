@@ -8,6 +8,7 @@
 #include "purpleconstants.h"
 #include "movementcommands.h"
 #include "ui.h"
+#include <ESP32Servo.h>
 
 // Set web server port number to 80
 AsyncWebServer server(80);
@@ -181,15 +182,14 @@ void setup()
 
   pinMode(REDLED_PIN, OUTPUT);
   pinMode(GREENLED_PIN, OUTPUT);
-  pinMode(FWD_LED_PIN, OUTPUT);
-  pinMode(RVS_LED_PIN, OUTPUT);
+  pinMode(SERVO_ELEVATION_PIN, OUTPUT);
+  pinMode(SERVO_TRAVERSE_PIN, OUTPUT);
   pinMode(WATER_LED_PIN, OUTPUT);
   
 
   Serial.begin(115200); // Starts the serial communication // Setup serial object and define transmission speed
   Serial.println("");
   Serial.println("");// Clear some space in serial monitor
-
    
   // Connect to the WiFi network (see function below loop)
   connectToWiFi(networkName, networkPswd);
@@ -205,6 +205,20 @@ void setup()
 
   server.begin();
   Serial.println("HTTP server started");
+  
+  ESP32PWM::allocateTimer(0);
+	ESP32PWM::allocateTimer(1);
+	ESP32PWM::allocateTimer(2);
+	ESP32PWM::allocateTimer(3);
+	elevation_servo.setPeriodHertz(50);    // standard 50 hz servo
+  elevation_servo.attach(SERVO_ELEVATION_PIN,500, 2400);
+  elevation_servo.write(90);
+  delay(20);
+  traverse_servo.setPeriodHertz(50);    // standard 50 hz servo
+  traverse_servo.attach(SERVO_TRAVERSE_PIN,500, 2400);
+  traverse_servo.write(90);
+  delay(20);
+
   Serial.println("Setup() Complete");
 }
 
@@ -218,6 +232,5 @@ void loop()
   if(fwd)
   {    
     Serial.println("fwd in main loops");
-   digitalWrite(FWD_LED_PIN, HIGH);
   }
 }
