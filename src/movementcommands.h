@@ -10,17 +10,29 @@ TaskHandle_t _elevate_turret_task;
 TaskHandle_t _traverse_turret_task;
 
 void handleForward()
-{
+{ 
+  digitalWrite(MD_IN_1, HIGH);
+  digitalWrite(MD_IN_2, LOW);
+  digitalWrite(MD_IN_3, HIGH);
+  digitalWrite(MD_IN_4, LOW);
   Serial.println("Forward");
 }
 
 void handleReverse()
 {
+  digitalWrite(MD_IN_1, LOW);
+  digitalWrite(MD_IN_2, HIGH);
+  digitalWrite(MD_IN_3, LOW);
+  digitalWrite(MD_IN_4, HIGH);
   Serial.println("Reverse");
 }
 
 void handleStopAcceleration()
 {
+  digitalWrite(MD_IN_1, LOW);
+  digitalWrite(MD_IN_2, LOW);
+  digitalWrite(MD_IN_3, LOW);
+  digitalWrite(MD_IN_4, LOW);
   Serial.println("Stop Acceleration");
 }
 

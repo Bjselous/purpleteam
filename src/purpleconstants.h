@@ -23,12 +23,16 @@ const char * networkName = "PurpleT";
 const char * networkPswd = "1qaz2wsx";
 
 //LED
-const int REDLED_PIN = 27;
-const int GREENLED_PIN = 26;
-
 const int SERVO_ELEVATION_PIN = 33;
 const int SERVO_TRAVERSE_PIN = 32;
 const int WATER_LED_PIN = 12;
+
+const int MD_ENABLE_1 = 14;
+const int MD_IN_1 = 27;
+const int MD_IN_2 = 26;
+const int MD_IN_3 = 25;
+const int MD_IN_4 = 13;
+const int MD_ENABLE_2 = 12;
 
 bool fwd = false;
 

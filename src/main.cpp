@@ -20,18 +20,18 @@ AsyncWebSocket ws("/ws");
 void connectToWiFi(const char * ssid, const char * pwd)
 {
     
-  // Serial.println("Scanning WIFI Network: " + String(ssid));
-  // int numberOfNetworks = WiFi.scanNetworks(); 
-  // Serial.println("Number of networks dount: " + String(numberOfNetworks));
+   Serial.println("Scanning WIFI Network: " + String(ssid));
+   int numberOfNetworks = WiFi.scanNetworks(); 
+   Serial.println("Number of networks dount: " + String(numberOfNetworks));
   
-  // for(int i =0; i<numberOfNetworks; i++)
-  // { 
-  //     Serial.print("Network name: ");
-  //     Serial.println(WiFi.SSID(i));
-  //     Serial.print("Signal strength: ");
-  //     Serial.println(WiFi.RSSI(i));
-  //     Serial.println("-----------------------"); 
-  // }
+  for(int i =0; i<numberOfNetworks; i++)
+  { 
+      Serial.print("Network name: ");
+      Serial.println(WiFi.SSID(i));
+      Serial.print("Signal strength: ");
+      Serial.println(WiFi.RSSI(i));
+      Serial.println("-----------------------"); 
+  }
   
   Serial.println("Connecting to WiFi network: " + String(ssid));
   WiFi.begin(ssid, pwd);
@@ -41,9 +41,9 @@ void connectToWiFi(const char * ssid, const char * pwd)
   while (WiFi.status() != WL_CONNECTED) 
   {
     // Blink LED while we're connecting:
-    digitalWrite(GREENLED_PIN, HIGH);
+    //digitalWrite(GREENLED_PIN, HIGH);
     delay(500);
-    digitalWrite(GREENLED_PIN, LOW);
+    //digitalWrite(GREENLED_PIN, LOW);
     delay(500);
     Serial.println(WiFi.status());
     connectionAttemptCycles++;
@@ -51,8 +51,8 @@ void connectToWiFi(const char * ssid, const char * pwd)
     //If we havent connected in 5 cycles restart
     if(connectionAttemptCycles>5)
     {
-      digitalWrite(REDLED_PIN, LOW);
-      digitalWrite(GREENLED_PIN, LOW);
+      //digitalWrite(REDLED_PIN, LOW);
+      //digitalWrite(GREENLED_PIN, LOW);
       Serial.println("Restarting ESP");
       Serial.println();
       Serial.println();
@@ -61,8 +61,8 @@ void connectToWiFi(const char * ssid, const char * pwd)
     }
   }
 
-  digitalWrite(GREENLED_PIN, HIGH);
-  digitalWrite(REDLED_PIN, LOW);
+  //digitalWrite(GREENLED_PIN, HIGH);
+  //digitalWrite(REDLED_PIN, LOW);
 
   Serial.println();
   Serial.println("WiFi connected!");
@@ -180,12 +180,20 @@ void setup()
 {
   WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); //disable brownout detector
 
-  pinMode(REDLED_PIN, OUTPUT);
-  pinMode(GREENLED_PIN, OUTPUT);
+  //pinMode(REDLED_PIN, OUTPUT);
+  //pinMode(GREENLED_PIN, OUTPUT);
   pinMode(SERVO_ELEVATION_PIN, OUTPUT);
   pinMode(SERVO_TRAVERSE_PIN, OUTPUT);
   pinMode(WATER_LED_PIN, OUTPUT);
-  
+  pinMode(MD_ENABLE_1, OUTPUT);
+  pinMode(MD_ENABLE_2, OUTPUT);
+  pinMode(MD_IN_1, OUTPUT);
+  pinMode(MD_IN_2, OUTPUT);
+  pinMode(MD_IN_3, OUTPUT);
+  pinMode(MD_IN_4, OUTPUT);
+
+  digitalWrite(MD_ENABLE_1, HIGH);
+  digitalWrite(MD_ENABLE_2, HIGH);
 
   Serial.begin(115200); // Starts the serial communication // Setup serial object and define transmission speed
   Serial.println("");
