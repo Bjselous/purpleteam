@@ -20,18 +20,18 @@ AsyncWebSocket ws("/ws");
 void connectToWiFi(const char * ssid, const char * pwd)
 {
     
-   Serial.println("Scanning WIFI Network: " + String(ssid));
-   int numberOfNetworks = WiFi.scanNetworks(); 
-   Serial.println("Number of networks dount: " + String(numberOfNetworks));
+  //  Serial.println("Scanning WIFI Network: " + String(ssid));
+  //  int numberOfNetworks = WiFi.scanNetworks(); 
+  //  Serial.println("Number of networks dount: " + String(numberOfNetworks));
   
-  for(int i =0; i<numberOfNetworks; i++)
-  { 
-      Serial.print("Network name: ");
-      Serial.println(WiFi.SSID(i));
-      Serial.print("Signal strength: ");
-      Serial.println(WiFi.RSSI(i));
-      Serial.println("-----------------------"); 
-  }
+  // for(int i =0; i<numberOfNetworks; i++)
+  // { 
+  //     Serial.print("Network name: ");
+  //     Serial.println(WiFi.SSID(i));
+  //     Serial.print("Signal strength: ");
+  //     Serial.println(WiFi.RSSI(i));
+  //     Serial.println("-----------------------"); 
+  // }
   
   Serial.println("Connecting to WiFi network: " + String(ssid));
   WiFi.begin(ssid, pwd);
@@ -137,7 +137,19 @@ void processMovementCommand(String inputValue)
     case WATER_STOP:
         handleWaterStop();      
       break;
+
+    case LINEAR_ACTUATOR_UP:
+        handleLinearActuatorUp();      
+      break;
   
+    case LINEAR_ACTUATOR_DOWN:
+        handleLinearActuatorDown();      
+      break;
+
+    case LINEAR_ACTUATOR_STOP:
+        handleLinearActuatorStop();      
+      break;
+
     default:
       Serial.println("Unkown Websocket event code");    
       break;
@@ -184,16 +196,24 @@ void setup()
   //pinMode(GREENLED_PIN, OUTPUT);
   pinMode(SERVO_ELEVATION_PIN, OUTPUT);
   pinMode(SERVO_TRAVERSE_PIN, OUTPUT);
-  pinMode(WATER_LED_PIN, OUTPUT);
   pinMode(MD_ENABLE_1, OUTPUT);
   pinMode(MD_ENABLE_2, OUTPUT);
   pinMode(MD_IN_1, OUTPUT);
   pinMode(MD_IN_2, OUTPUT);
   pinMode(MD_IN_3, OUTPUT);
   pinMode(MD_IN_4, OUTPUT);
+  pinMode(LA_IN_1, OUTPUT);
+  pinMode(LA_IN_2, OUTPUT);
+
+  pinMode(WATER_RELAY_PIN, OUTPUT);
 
   digitalWrite(MD_ENABLE_1, HIGH);
   digitalWrite(MD_ENABLE_2, HIGH);
+  digitalWrite(LA_ENABLE, HIGH);
+
+  digitalWrite(LA_IN_1, LOW);
+  digitalWrite(LA_IN_2, LOW);
+  pinMode(WATER_RELAY_PIN, LOW);
 
   Serial.begin(115200); // Starts the serial communication // Setup serial object and define transmission speed
   Serial.println("");

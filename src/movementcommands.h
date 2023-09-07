@@ -158,16 +158,38 @@ void handleStopTurretTraverseChange()
   Serial.println("Stop Turret Traverse Change");
 }
 
+
+
+void handleLinearActuatorUp()
+{  digitalWrite(LA_IN_1, LOW);
+  digitalWrite(LA_IN_2, HIGH);
+  Serial.println("Linear Actuator Up");
+}
+
+void handleLinearActuatorDown()
+{ 
+    digitalWrite(LA_IN_1, HIGH);
+    digitalWrite(LA_IN_2, LOW);
+    Serial.println("Linear Actuator Down");
+}
+
+void handleLinearActuatorStop()
+{
+  digitalWrite(LA_IN_1, LOW);
+  digitalWrite(LA_IN_2, LOW);
+    Serial.println("Linear Actuator Stop");
+}
+
 void handleWaterStart()
 {
-  digitalWrite(WATER_LED_PIN, HIGH);
+  digitalWrite(WATER_RELAY_PIN, HIGH);
   Serial.println("Water Start");
 }
 
 void handleWaterStop()
 {
-   digitalWrite(WATER_LED_PIN, LOW);
-    Serial.println("Water Stop");
+  digitalWrite(WATER_RELAY_PIN, LOW);
+  Serial.println("Water Stop");
 }
 
 void handleStopAll()
@@ -176,4 +198,5 @@ void handleStopAll()
     handleStopTurretElevationChange();
     handleStopTurretTraverseChange();
     handleWaterStop();
+    handleLinearActuatorStop();
 }
