@@ -192,8 +192,6 @@ void setup()
 {
   WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); //disable brownout detector
 
-  //pinMode(REDLED_PIN, OUTPUT);
-  //pinMode(GREENLED_PIN, OUTPUT);
   pinMode(SERVO_ELEVATION_PIN, OUTPUT);
   pinMode(SERVO_TRAVERSE_PIN, OUTPUT);
   pinMode(MD_ENABLE_1, OUTPUT);
@@ -250,15 +248,8 @@ void setup()
   Serial.println("Setup() Complete");
 }
 
-
-
 void loop() 
 {
   //Remove any old clients to improve performance
-  //ws.cleanupClients(); 
-
-  if(fwd)
-  {    
-    Serial.println("fwd in main loops");
-  }
+  ws.cleanupClients(); 
 }

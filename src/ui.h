@@ -111,7 +111,7 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
         <tr>
             <td></td>
             <td></td>
-            <td onmousedown='onTouchStartAndEnd("4")' ontouchstart='onTouchStartAndEnd("4")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8679;</span></td>
+            <td onmousedown='onTouchStartAndEnd("4")' ontouchstart='onTouchStartAndEnd("5")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8679;</span></td>
             <td></td>
             <td></td>
         </tr>
@@ -119,7 +119,7 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
          <tr>
             <td></td>
             <td></td>
-            <td onmousedown='onTouchStartAndEnd("4")' ontouchstart='onTouchStartAndEnd("4")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8679;</span></td>
+            <td onmousedown='onTouchStartAndEnd("4")' ontouchstart='onTouchStartAndEnd("5")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8679;</span></td>
             <td></td>
             <td></td>
         </tr>
@@ -135,7 +135,7 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
         <tr>
             <td></td>
             <td></td>
-            <td onmousedown='onTouchStartAndEnd("5")' ontouchstart='onTouchStartAndEnd("5")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8681;</span></td>
+            <td onmousedown='onTouchStartAndEnd("5")' ontouchstart='onTouchStartAndEnd("4")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8681;</span></td>
             <td></td>
             <td></td>
         </tr>
@@ -143,7 +143,7 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
         <tr>
             <td></td>
             <td></td>
-            <td onmousedown='onTouchStartAndEnd("5")' ontouchstart='onTouchStartAndEnd("5")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8681;</span></td>
+            <td onmousedown='onTouchStartAndEnd("5")' ontouchstart='onTouchStartAndEnd("4")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8681;</span></td>
             <td></td>
             <td></td>
         </tr>
