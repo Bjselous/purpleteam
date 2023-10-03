@@ -11,8 +11,9 @@ TaskHandle_t _traverse_turret_task;
 
 void handleForward()
 { 
-  digitalWrite(MD_IN_1, HIGH);
-  digitalWrite(MD_IN_2, LOW);
+  digitalWrite(MD_ENABLE, HIGH);
+  //digitalWrite(MD_IN_1, HIGH);
+  //digitalWrite(MD_IN_2, LOW);
   digitalWrite(MD_IN_3, HIGH);
   digitalWrite(MD_IN_4, LOW);
   Serial.println("Forward");
@@ -20,8 +21,9 @@ void handleForward()
 
 void handleReverse()
 {
-  digitalWrite(MD_IN_1, LOW);
-  digitalWrite(MD_IN_2, HIGH);
+  digitalWrite(MD_ENABLE, HIGH);
+  //digitalWrite(MD_IN_1, LOW);
+  //digitalWrite(MD_IN_2, HIGH);
   digitalWrite(MD_IN_3, LOW);
   digitalWrite(MD_IN_4, HIGH);
   Serial.println("Reverse");
@@ -29,10 +31,11 @@ void handleReverse()
 
 void handleStopAcceleration()
 {
-  digitalWrite(MD_IN_1, LOW);
-  digitalWrite(MD_IN_2, LOW);
+  //digitalWrite(MD_IN_1, LOW);
+  //digitalWrite(MD_IN_2, LOW);
   digitalWrite(MD_IN_3, LOW);
   digitalWrite(MD_IN_4, LOW);
+  digitalWrite(MD_ENABLE, LOW);
   Serial.println("Stop Acceleration");
 }
 
@@ -158,37 +161,45 @@ void handleStopTurretTraverseChange()
   Serial.println("Stop Turret Traverse Change");
 }
 
-
-
 void handleLinearActuatorUp()
-{  digitalWrite(LA_IN_1, LOW);
+{  
+  digitalWrite(LA_ENABLE, HIGH);
+  digitalWrite(LA_IN_1, LOW);
   digitalWrite(LA_IN_2, HIGH);
   Serial.println("Linear Actuator Up");
 }
 
 void handleLinearActuatorDown()
 { 
-    digitalWrite(LA_IN_1, HIGH);
-    digitalWrite(LA_IN_2, LOW);
-    Serial.println("Linear Actuator Down");
+  digitalWrite(LA_ENABLE, HIGH);
+  digitalWrite(LA_IN_1, HIGH);
+  digitalWrite(LA_IN_2, LOW);
+  Serial.println("Linear Actuator Down");
 }
 
 void handleLinearActuatorStop()
 {
   digitalWrite(LA_IN_1, LOW);
   digitalWrite(LA_IN_2, LOW);
-    Serial.println("Linear Actuator Stop");
+  digitalWrite(LA_ENABLE, LOW);
+  Serial.println("Linear Actuator Stop");
 }
 
 void handleWaterStart()
 {
-  digitalWrite(WATER_RELAY_PIN, HIGH);
+  digitalWrite(PD_ENABLE, HIGH);
+  digitalWrite(PD_IN_1, HIGH);
+  digitalWrite(PD_IN_2, LOW);
+  //digitalWrite(WATER_RELAY_PIN, HIGH);
   Serial.println("Water Start");
 }
 
 void handleWaterStop()
 {
-  digitalWrite(WATER_RELAY_PIN, LOW);
+  digitalWrite(PD_IN_1, LOW);
+  digitalWrite(PD_IN_2, LOW);
+  digitalWrite(PD_ENABLE, LOW);
+  //digitalWrite(WATER_RELAY_PIN, LOW);
   Serial.println("Water Stop");
 }
 

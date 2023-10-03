@@ -84,9 +84,20 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
   <body class="noselect" align="center" style="background-color:purple">
          
     <table id="mainTable" style="width:400px;margin:auto;table-layout:fixed" CELLSPACING=10>
+
+      <tr>
+            <td></td>
+            <td></td>
+            <!-- Creep Forward -->
+            <td onmousedown='onTouchStartAndEnd("1")' ontouchstart='onTouchStartAndEnd("1")' onmouseup='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("3")' class="button"><span class="driveArrows" >&#8679;</span></td>
+            <td></td>
+            <td></td>
+        </tr>
+
         <tr>
             <td></td>
             <td></td>
+            <!-- Forward -->
             <td onmousedown='onTouchStartAndEnd("1")' ontouchstart='onTouchStartAndEnd("1")' onmouseup='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("3")' class="button"><span class="driveArrows" >&#8679;</span></td>
             <td></td>
             <td></td>
@@ -95,6 +106,16 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
         <tr>
             <td></td>
             <td></td>
+            <!-- Backwards -->
+            <td onmousedown='onTouchStartAndEnd("2")' ontouchstart='onTouchStartAndEnd("2")' onmouseup='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("3")' class="button"><span class="driveArrows" >&#8681;</span></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <!-- Creep Backwards -->
             <td onmousedown='onTouchStartAndEnd("2")' ontouchstart='onTouchStartAndEnd("2")' onmouseup='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("3")' class="button"><span class="driveArrows" >&#8681;</span></td>
             <td></td>
             <td></td>

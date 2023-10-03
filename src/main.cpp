@@ -13,6 +13,11 @@
 // Set web server port number to 80
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
+IPAddress local_IP(192,168,201,200);
+IPAddress gateway(192, 168, 1, 4);
+IPAddress subnet(255, 255, 255, 0);
+IPAddress primaryDNS(8, 8, 8, 8); 
+IPAddress secondaryDNS(8, 8, 4, 4);
 
 /// @brief Connects to the wifi network using the passed ssid and pwd
 /// @param ssid 
@@ -34,6 +39,13 @@ void connectToWiFi(const char * ssid, const char * pwd)
   // }
   
   Serial.println("Connecting to WiFi network: " + String(ssid));
+
+  //set up static IP address so that we can enter known ip addresses on devices 
+  if(!WiFi.config(local_IP, gateway, subnet, primaryDNS, secondaryDNS)) 
+  {
+    Serial.println("STA Failed to configure");
+  }
+
   WiFi.begin(ssid, pwd);
 
   int connectionAttemptCycles =0;
@@ -194,24 +206,21 @@ void setup()
 
   pinMode(SERVO_ELEVATION_PIN, OUTPUT);
   pinMode(SERVO_TRAVERSE_PIN, OUTPUT);
-  pinMode(MD_ENABLE_1, OUTPUT);
-  pinMode(MD_ENABLE_2, OUTPUT);
-  pinMode(MD_IN_1, OUTPUT);
-  pinMode(MD_IN_2, OUTPUT);
+ 
+  pinMode(MD_ENABLE, OUTPUT);
   pinMode(MD_IN_3, OUTPUT);
   pinMode(MD_IN_4, OUTPUT);
+
+  pinMode(PD_ENABLE, OUTPUT);
+  pinMode(PD_IN_1, OUTPUT);
+  pinMode(PD_IN_2, OUTPUT);
+
+  pinMode(LA_ENABLE, OUTPUT);
   pinMode(LA_IN_1, OUTPUT);
   pinMode(LA_IN_2, OUTPUT);
-
-  pinMode(WATER_RELAY_PIN, OUTPUT);
-
-  digitalWrite(MD_ENABLE_1, HIGH);
-  digitalWrite(MD_ENABLE_2, HIGH);
-  digitalWrite(LA_ENABLE, HIGH);
-
+  
   digitalWrite(LA_IN_1, LOW);
   digitalWrite(LA_IN_2, LOW);
-  pinMode(WATER_RELAY_PIN, LOW);
 
   Serial.begin(115200); // Starts the serial communication // Setup serial object and define transmission speed
   Serial.println("");
