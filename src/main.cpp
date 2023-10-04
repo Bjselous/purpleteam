@@ -8,10 +8,16 @@
 #include "purpleconstants.h"
 #include "movementcommands.h"
 #include "ui.h"
+#include <ESP32Servo.h>
 
 // Set web server port number to 80
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
+IPAddress local_IP(192,168,201,200);
+IPAddress gateway(192, 168, 1, 4);
+IPAddress subnet(255, 255, 255, 0);
+IPAddress primaryDNS(8, 8, 8, 8); 
+IPAddress secondaryDNS(8, 8, 4, 4);
 
 /// @brief Connects to the wifi network using the passed ssid and pwd
 /// @param ssid 
@@ -19,9 +25,9 @@ AsyncWebSocket ws("/ws");
 void connectToWiFi(const char * ssid, const char * pwd)
 {
     
-  // Serial.println("Scanning WIFI Network: " + String(ssid));
-  // int numberOfNetworks = WiFi.scanNetworks(); 
-  // Serial.println("Number of networks dount: " + String(numberOfNetworks));
+  //  Serial.println("Scanning WIFI Network: " + String(ssid));
+  //  int numberOfNetworks = WiFi.scanNetworks(); 
+  //  Serial.println("Number of networks dount: " + String(numberOfNetworks));
   
   // for(int i =0; i<numberOfNetworks; i++)
   // { 
@@ -33,6 +39,13 @@ void connectToWiFi(const char * ssid, const char * pwd)
   // }
   
   Serial.println("Connecting to WiFi network: " + String(ssid));
+
+  //set up static IP address so that we can enter known ip addresses on devices 
+  if(!WiFi.config(local_IP, gateway, subnet, primaryDNS, secondaryDNS)) 
+  {
+    Serial.println("STA Failed to configure");
+  }
+
   WiFi.begin(ssid, pwd);
 
   int connectionAttemptCycles =0;
@@ -40,18 +53,18 @@ void connectToWiFi(const char * ssid, const char * pwd)
   while (WiFi.status() != WL_CONNECTED) 
   {
     // Blink LED while we're connecting:
-    digitalWrite(GREENLED_PIN, HIGH);
-    delay(1000);
-    digitalWrite(GREENLED_PIN, LOW);
-    delay(1000);
+    //digitalWrite(GREENLED_PIN, HIGH);
+    delay(500);
+    //digitalWrite(GREENLED_PIN, LOW);
+    delay(500);
     Serial.println(WiFi.status());
     connectionAttemptCycles++;
 
     //If we havent connected in 5 cycles restart
     if(connectionAttemptCycles>5)
     {
-      digitalWrite(REDLED_PIN, LOW);
-      digitalWrite(GREENLED_PIN, LOW);
+      //digitalWrite(REDLED_PIN, LOW);
+      //digitalWrite(GREENLED_PIN, LOW);
       Serial.println("Restarting ESP");
       Serial.println();
       Serial.println();
@@ -60,18 +73,8 @@ void connectToWiFi(const char * ssid, const char * pwd)
     }
   }
 
-  digitalWrite(REDLED_PIN, LOW);
-  digitalWrite(GREENLED_PIN, HIGH);
-  delay(250);
-  digitalWrite(GREENLED_PIN, LOW);
-  delay(250);
-  digitalWrite(GREENLED_PIN, HIGH);
-  delay(250);
-  digitalWrite(GREENLED_PIN, LOW);
-  delay(250);
-  digitalWrite(GREENLED_PIN, HIGH);
-  delay(250);
-  digitalWrite(GREENLED_PIN, LOW);
+  //digitalWrite(GREENLED_PIN, HIGH);
+  //digitalWrite(REDLED_PIN, LOW);
 
   Serial.println();
   Serial.println("WiFi connected!");
@@ -146,7 +149,19 @@ void processMovementCommand(String inputValue)
     case WATER_STOP:
         handleWaterStop();      
       break;
+
+    case LINEAR_ACTUATOR_UP:
+        handleLinearActuatorUp();      
+      break;
   
+    case LINEAR_ACTUATOR_DOWN:
+        handleLinearActuatorDown();      
+      break;
+
+    case LINEAR_ACTUATOR_STOP:
+        handleLinearActuatorStop();      
+      break;
+
     default:
       Serial.println("Unkown Websocket event code");    
       break;
@@ -189,16 +204,28 @@ void setup()
 {
   WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); //disable brownout detector
 
-  pinMode(REDLED_PIN, OUTPUT);
-  pinMode(GREENLED_PIN, OUTPUT);
+  pinMode(SERVO_ELEVATION_PIN, OUTPUT);
+  pinMode(SERVO_TRAVERSE_PIN, OUTPUT);
+ 
+  pinMode(MD_ENABLE, OUTPUT);
+  pinMode(MD_IN_3, OUTPUT);
+  pinMode(MD_IN_4, OUTPUT);
+
+  pinMode(PD_ENABLE, OUTPUT);
+  pinMode(PD_IN_1, OUTPUT);
+  pinMode(PD_IN_2, OUTPUT);
+
+  pinMode(LA_ENABLE, OUTPUT);
+  pinMode(LA_IN_1, OUTPUT);
+  pinMode(LA_IN_2, OUTPUT);
+  
+  digitalWrite(LA_IN_1, LOW);
+  digitalWrite(LA_IN_2, LOW);
 
   Serial.begin(115200); // Starts the serial communication // Setup serial object and define transmission speed
   Serial.println("");
   Serial.println("");// Clear some space in serial monitor
-
-  //Red LED on so know there is power
-  digitalWrite(REDLED_PIN, HIGH);
-
+   
   // Connect to the WiFi network (see function below loop)
   connectToWiFi(networkName, networkPswd);
   
@@ -209,10 +236,24 @@ void setup()
   
   ws.onEvent(onWebSocketEvent);
   server.addHandler(&ws);
-  
+ 
 
   server.begin();
   Serial.println("HTTP server started");
+  
+  ESP32PWM::allocateTimer(0);
+	ESP32PWM::allocateTimer(1);
+	ESP32PWM::allocateTimer(2);
+	ESP32PWM::allocateTimer(3);
+	elevation_servo.setPeriodHertz(50);    // standard 50 hz servo
+  elevation_servo.attach(SERVO_ELEVATION_PIN,500, 2400);
+  elevation_servo.write(90);
+  delay(20);
+  traverse_servo.setPeriodHertz(50);    // standard 50 hz servo
+  traverse_servo.attach(SERVO_TRAVERSE_PIN,500, 2400);
+  traverse_servo.write(90);
+  delay(20);
+
   Serial.println("Setup() Complete");
 }
 

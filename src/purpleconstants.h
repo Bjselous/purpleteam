@@ -1,3 +1,6 @@
+#ifndef PURPLE_CONSTANTS
+#define PURPLE_CONSTANTS
+
 #define STOP_ALL 0
 
 #define FORWARD 1
@@ -15,10 +18,34 @@
 #define WATER_START 10
 #define WATER_STOP 11
 
+#define LINEAR_ACTUATOR_UP 12
+#define LINEAR_ACTUATOR_DOWN 13
+#define LINEAR_ACTUATOR_STOP 14
+
+
 // WiFi network name and password:
 const char * networkName = "PurpleT";
 const char * networkPswd = "1qaz2wsx";
 
 //LED
-const int REDLED_PIN = 27;
-const int GREENLED_PIN = 26;
+const int SERVO_ELEVATION_PIN = 33;
+const int SERVO_TRAVERSE_PIN = 32;
+
+const int PD_ENABLE = 14;
+const int PD_IN_1 = 27;
+const int PD_IN_2 = 26;
+
+const int MD_ENABLE = 12;
+const int MD_IN_3 = 25;
+const int MD_IN_4 = 13;
+
+
+const int LA_ENABLE = 05;
+const int LA_IN_1 = 18;
+const int LA_IN_2 = 19;
+
+//const int WATER_RELAY_PIN = 23;
+
+bool fwd = false;
+
+#endif
