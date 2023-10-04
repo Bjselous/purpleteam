@@ -19,6 +19,16 @@ void handleForward()
   Serial.println("Forward");
 }
 
+void handleCreepForward()
+{ 
+  digitalWrite(MD_ENABLE, HIGH);
+  //digitalWrite(MD_IN_1, HIGH);
+  //digitalWrite(MD_IN_2, LOW);
+  digitalWrite(MD_IN_3, HIGH);
+  digitalWrite(MD_IN_4, LOW);
+  Serial.println("Creep Forward");
+}
+
 void handleReverse()
 {
   digitalWrite(MD_ENABLE, HIGH);
@@ -27,6 +37,16 @@ void handleReverse()
   digitalWrite(MD_IN_3, LOW);
   digitalWrite(MD_IN_4, HIGH);
   Serial.println("Reverse");
+}
+
+void handleCreepReverse()
+{
+  digitalWrite(MD_ENABLE, HIGH);
+  //digitalWrite(MD_IN_1, LOW);
+  //digitalWrite(MD_IN_2, HIGH);
+  digitalWrite(MD_IN_3, LOW);
+  digitalWrite(MD_IN_4, HIGH);
+  Serial.println("Creep Reverse");
 }
 
 void handleStopAcceleration()
@@ -52,12 +72,38 @@ void elevateTurret(void* pvParameters)
    vTaskDelete(NULL);
 }
 
+void slowElevateTurret(void* pvParameters)
+{
+  while(_turret_elevation_postion < 170)
+   {    
+    elevation_servo.write(_turret_elevation_postion+1);
+    delay(200);
+    _turret_elevation_postion++;
+    Serial.println("_turret_elevation = " + String(_turret_elevation_postion));
+   }
+    _elevate_turret_task = NULL;
+   vTaskDelete(NULL);
+}
+
 void depressTurret(void* pvParameters)
 {
   while(_turret_elevation_postion > 10)
    {
     elevation_servo.write(_turret_elevation_postion-1);
     delay(20);
+    _turret_elevation_postion--;
+    Serial.println("_turret_elevation = " + String(_turret_elevation_postion));
+   }
+   _elevate_turret_task = NULL;
+   vTaskDelete(NULL);
+}
+
+void slowDepressTurret(void* pvParameters)
+{
+  while(_turret_elevation_postion > 10)
+   {
+    elevation_servo.write(_turret_elevation_postion-1);
+    delay(200);
     _turret_elevation_postion--;
     Serial.println("_turret_elevation = " + String(_turret_elevation_postion));
    }
@@ -78,6 +124,19 @@ void handleElevateTurret()
   Serial.println("Elevate Turret");
 }
 
+void handleSlowElevateTurret()
+{
+   xTaskCreatePinnedToCore(
+                    slowElevateTurret,   /* Task function. */
+                    "SlowElevateTurretTasks",     /* name of task. */
+                    10000,       /* Stack size of task */
+                    NULL,        /* parameter of the task */
+                    1,           /* priority of the task */
+                    &_elevate_turret_task,      /* Task handle to keep track of created task */
+                    0); 
+  Serial.println("Slow Elevate Turret");
+}
+
 void handleDepressTurret()
 {     
     xTaskCreatePinnedToCore(
@@ -89,6 +148,19 @@ void handleDepressTurret()
                     &_elevate_turret_task,      /* Task handle to keep track of created task */
                     0); 
     Serial.println("Depress Turret");
+}
+
+void handleSlowDepressTurret()
+{     
+    xTaskCreatePinnedToCore(
+                    slowDepressTurret,   /* Task function. */
+                    "SlowDepressTurretTasks",     /* name of task. */
+                    10000,       /* Stack size of task */
+                    NULL,        /* parameter of the task */
+                    1,           /* priority of the task */
+                    &_elevate_turret_task,      /* Task handle to keep track of created task */
+                    0); 
+    Serial.println("Slow Depress Turret");
 }
 
 void handleStopTurretElevationChange()

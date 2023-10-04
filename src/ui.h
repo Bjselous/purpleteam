@@ -88,7 +88,7 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
             <td></td>
             <td></td>
             <!-- Creep Forward -->
-            <td onmousedown='onTouchStartAndEnd("1")' ontouchstart='onTouchStartAndEnd("1")' onmouseup='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("3")' class="button"><span class="driveArrows" >&#8679;</span></td>
+            <td onmousedown='onTouchStartAndEnd("15")' ontouchstart='onTouchStartAndEnd("15")' onmouseup='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("3")' class="button"><span class="driveArrows" >&#8679;</span></td>
             <td></td>
             <td></td>
         </tr>
@@ -115,7 +115,7 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
             <td></td>
             <td></td>
             <!-- Creep Backwards -->
-            <td onmousedown='onTouchStartAndEnd("2")' ontouchstart='onTouchStartAndEnd("2")' onmouseup='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("3")' class="button"><span class="driveArrows" >&#8681;</span></td>
+            <td onmousedown='onTouchStartAndEnd("16")' ontouchstart='onTouchStartAndEnd("16")' onmouseup='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("3")' class="button"><span class="driveArrows" >&#8681;</span></td>
             <td></td>
             <td></td>
         </tr>
@@ -131,7 +131,8 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
         <tr>
             <td></td>
             <td></td>
-            <td onmousedown='onTouchStartAndEnd("4")' ontouchstart='onTouchStartAndEnd("5")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8679;</span></td>
+            <!-- Slow Elevate Turret -->
+            <td onmousedown='onTouchStartAndEnd("17")' ontouchstart='onTouchStartAndEnd("17")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8679;</span></td>
             <td></td>
             <td></td>
         </tr>
@@ -139,23 +140,29 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
          <tr>
             <td></td>
             <td></td>
-            <td onmousedown='onTouchStartAndEnd("4")' ontouchstart='onTouchStartAndEnd("5")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8679;</span></td>
+            <!-- Elevate Turret -->
+            <td onmousedown='onTouchStartAndEnd("4")' ontouchstart='onTouchStartAndEnd("4")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8679;</span></td>
             <td></td>
             <td></td>
         </tr>
 
         <tr>
-            <td onmousedown='onTouchStartAndEnd("7")' ontouchstart='onTouchStartAndEnd("7")' onmouseup='onTouchStartAndEnd("9")' ontouchend='onTouchStartAndEnd("9")' class="button"><span class="circularArrows" >&#8634;</span></td>
+            <!-- SLOW TRAVERSE TURRET ANTICLOCKWISE -->
+            <td onmousedown='onTouchStartAndEnd("19")' ontouchstart='onTouchStartAndEnd("19")' onmouseup='onTouchStartAndEnd("9")' ontouchend='onTouchStartAndEnd("9")' class="button"><span class="circularArrows" >&#8634;</span></td>
+            <!-- TRAVERSE TURRET ANTICLOCKWISE -->
             <td onmousedown='onTouchStartAndEnd("7")' ontouchstart='onTouchStartAndEnd("7")' onmouseup='onTouchStartAndEnd("9")' ontouchend='onTouchStartAndEnd("9")' class="button"><span class="circularArrows" >&#8634;</span></td>
             <td></td>
+            <!-- TRAVERSE TURRET CLOCKWISE -->
             <td onmousedown='onTouchStartAndEnd("8")' ontouchstart='onTouchStartAndEnd("8")' onmouseup='onTouchStartAndEnd("9")' ontouchend='onTouchStartAndEnd("9")' class="button"><span class="circularArrows" >&#8635;</span></td>
-            <td onmousedown='onTouchStartAndEnd("8")' ontouchstart='onTouchStartAndEnd("8")' onmouseup='onTouchStartAndEnd("9")' ontouchend='onTouchStartAndEnd("9")' class="button"><span class="circularArrows" >&#8635;</span></td>
+            <!-- SLOW TRAVERSE TURRET CLOCKWISE -->
+            <td onmousedown='onTouchStartAndEnd("20")' ontouchstart='onTouchStartAndEnd("20")' onmouseup='onTouchStartAndEnd("9")' ontouchend='onTouchStartAndEnd("9")' class="button"><span class="circularArrows" >&#8635;</span></td>
         </tr>
 
         <tr>
             <td></td>
             <td></td>
-            <td onmousedown='onTouchStartAndEnd("5")' ontouchstart='onTouchStartAndEnd("4")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8681;</span></td>
+            <!-- Depress Turret -->
+            <td onmousedown='onTouchStartAndEnd("5")' ontouchstart='onTouchStartAndEnd("5")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8681;</span></td>
             <td></td>
             <td></td>
         </tr>
@@ -163,7 +170,8 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
         <tr>
             <td></td>
             <td></td>
-            <td onmousedown='onTouchStartAndEnd("5")' ontouchstart='onTouchStartAndEnd("4")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8681;</span></td>
+            <!-- Slow Depress Turret -->
+            <td onmousedown='onTouchStartAndEnd("18")' ontouchstart='onTouchStartAndEnd("18")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8681;</span></td>
             <td></td>
             <td></td>
         </tr>
@@ -179,6 +187,7 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
         <tr>
             <td></td>
             <td></td>
+            <!-- Linear Actuator Up -->
             <td onmousedown='onTouchStartAndEnd("12")' ontouchstart='onTouchStartAndEnd("12")' onmouseup='onTouchStartAndEnd("14")' ontouchend='onTouchStartAndEnd("14")' class="button"><span class="driveArrows" >&#8679;</span></td>
             <td></td>
             <td></td>
@@ -187,17 +196,18 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
         <tr>
             <td></td>
             <td></td>
+             <!-- Linear Actuator Down -->
             <td onmousedown='onTouchStartAndEnd("13")' ontouchstart='onTouchStartAndEnd("13")' onmouseup='onTouchStartAndEnd("14")' ontouchend='onTouchStartAndEnd("14")' class="button"><span class="driveArrows" >&#8681;</span></td>
             <td></td>
             <td></td>
         </tr>
 
         <tr>
-            <td><span class="empty" ></span></td>
-            <td><span class="empty" ></span></td>    
-            <td><span class="empty" ></span></td>
-            <td><span class="empty" ></span></td>    
-            <td><span class="empty" ></span></td>
+            <td><span class="empty"></span></td>
+            <td><span class="empty"></span></td>    
+            <td><span class="empty"></span></td>
+            <td><span class="empty"></span></td>    
+            <td><span class="empty"></span></td>
         </tr>
 
         <tr>

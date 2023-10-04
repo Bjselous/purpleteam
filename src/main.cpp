@@ -109,10 +109,18 @@ void processMovementCommand(String inputValue)
     case FORWARD:
         handleForward();                       
       break;
+
+    case CREEP_FORWARD:
+        handleCreepForward();                       
+      break;
   
     case REVERSE:
         handleReverse();
       break;
+
+    case CREEP_REVERSE:
+      handleCreepReverse();
+    break;
   
     case STOPACCELERATION:
         handleStopAcceleration();
@@ -121,9 +129,17 @@ void processMovementCommand(String inputValue)
     case ELEVATE_TURRET:
         handleElevateTurret();
       break;
+
+    case SLOW_ELEVATE_TURRET:
+        handleSlowElevateTurret();
+      break;
   
     case DEPRESS_TURRET:
         handleDepressTurret();
+      break;
+
+    case SLOW_DEPRESS_TURRET:
+        handleSlowDepressTurret();
       break;
   
     case STOP_TURRET_ELEVATION_CHANGE:
