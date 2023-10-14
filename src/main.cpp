@@ -149,9 +149,17 @@ void processMovementCommand(String inputValue)
     case TRAVERSE_TURRET_ANTICLOCKWISE:
         handleTraverseTurretAnticlockwise();
       break;
-  
+     
     case TRAVERSE_TURRET_CLOCKWISE:
         handleTraverseTurretClockwise();  
+      break;
+
+      case SLOW_TRAVERSE_TURRET_CLOCKWISE:
+        handleSlowTraverseTurretClockwise();
+      break;
+
+      case SLOW_TRAVERSE_TURRET_ANTICLOCKWISE:
+        handleSlowTraverseTurretAnticlockwise();
       break;
   
     case STOP_TURRET_TRAVERSE_CHANGE:
@@ -160,6 +168,18 @@ void processMovementCommand(String inputValue)
   
     case WATER_START:
         handleWaterStart();  
+      break;
+
+    case WATER_PULSE_1:
+        handleWaterPulse1();  
+      break;
+
+      case WATER_PULSE_2:
+        handleWaterPulse2();  
+      break;
+
+      case WATER_PULSE_3:
+        handleWaterPulse3();  
       break;
   
     case WATER_STOP:
@@ -176,6 +196,14 @@ void processMovementCommand(String inputValue)
 
     case LINEAR_ACTUATOR_STOP:
         handleLinearActuatorStop();      
+      break;
+
+    case LASER_ON:
+        handleLaserOn();      
+      break;
+
+    case LASER_OFF:
+        handleLaserOff();      
       break;
 
     default:
@@ -234,7 +262,10 @@ void setup()
   pinMode(LA_ENABLE, OUTPUT);
   pinMode(LA_IN_1, OUTPUT);
   pinMode(LA_IN_2, OUTPUT);
-  
+
+  pinMode(LASER_PIN, OUTPUT);
+  digitalWrite(LASER_PIN, LOW);
+
   digitalWrite(LA_IN_1, LOW);
   digitalWrite(LA_IN_2, LOW);
 
@@ -253,7 +284,6 @@ void setup()
   ws.onEvent(onWebSocketEvent);
   server.addHandler(&ws);
  
-
   server.begin();
   Serial.println("HTTP server started");
   

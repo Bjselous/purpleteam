@@ -23,12 +23,16 @@
 
 #define WATER_START 10
 #define WATER_STOP 11
+#define WATER_PULSE_1 23
+#define WATER_PULSE_2 24
+#define WATER_PULSE_3 25
 
 #define LINEAR_ACTUATOR_UP 12
 #define LINEAR_ACTUATOR_DOWN 13
 #define LINEAR_ACTUATOR_STOP 14
 
-
+#define LASER_ON 21
+#define LASER_OFF 22
 
 // WiFi network name and password:
 const char * networkName = "PurpleT";
@@ -51,7 +55,7 @@ const int LA_ENABLE = 05;
 const int LA_IN_1 = 18;
 const int LA_IN_2 = 19;
 
-//const int WATER_RELAY_PIN = 23;
+const int LASER_PIN = 23;
 
 bool fwd = false;
 

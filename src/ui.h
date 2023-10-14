@@ -129,12 +129,12 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
         </tr>
 
         <tr>
-            <td></td>
+            <td onmousedown='onTouchStartAndEnd("21")' ontouchstart='onTouchStartAndEnd("21")' class="button"><span class="turretArrows" >ON</span></td>
             <td></td>
             <!-- Slow Elevate Turret -->
             <td onmousedown='onTouchStartAndEnd("17")' ontouchstart='onTouchStartAndEnd("17")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8679;</span></td>
             <td></td>
-            <td></td>
+            <td onmousedown='onTouchStartAndEnd("22")' ontouchstart='onTouchStartAndEnd("22")' class="button"><span class="turretArrows" >OFF</span></td>
         </tr>
 
          <tr>
@@ -211,9 +211,20 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
         </tr>
 
         <tr>
+            <td><span class="empty"></span></td>
+            <td onmousedown='onTouchStartAndEnd("23")' ontouchstart='onTouchStartAndEnd("23")' class="button"><span class="waterSymbols" >1</span></td>  
+            <td onmousedown='onTouchStartAndEnd("24")' ontouchstart='onTouchStartAndEnd("24")' class="button"><span class="waterSymbols" >2</span></td>
+            <td onmousedown='onTouchStartAndEnd("25")' ontouchstart='onTouchStartAndEnd("25")' class="button"><span class="waterSymbols" >3</span></td>  
+            <td><span class="empty"></span></td>
+        </tr>
+
+        <tr>
             <td></td>
+            <!-- Water pump constant on -->
             <td onmousedown='onTouchStartAndEnd("10")' ontouchstart='onTouchStartAndEnd("10")' class="button"><span class="waterSymbols" >ON</span></td>
+            <!-- Water pump constant of -->
             <td onmousedown='onTouchStartAndEnd("10")' ontouchstart='onTouchStartAndEnd("10")' onmouseup='onTouchStartAndEnd("11")' ontouchend='onTouchStartAndEnd("11")' class="button"><span class="waterSymbols" >&#128167;</span></td>
+            <!-- Water pump constant of -->
             <td onmousedown='onTouchStartAndEnd("11")' ontouchstart='onTouchStartAndEnd("11")' class="button"><span class="waterSymbols" >OFF</span></td>
             <td></td>
         </tr>
