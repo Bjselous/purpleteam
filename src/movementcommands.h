@@ -13,7 +13,7 @@ TaskHandle_t _traverse_turret_task;
 
 void handleForward()
 { 
-  digitalWrite(MD_ENABLE, HIGH);
+  analogWrite(MD_ENABLE, 250);
   digitalWrite(MD_IN_3, HIGH);
   digitalWrite(MD_IN_4, LOW);
   Serial.println("Forward");
@@ -21,7 +21,7 @@ void handleForward()
 
 void handleCreepForward()
 { 
-  digitalWrite(MD_ENABLE, HIGH);
+  analogWrite(MD_ENABLE, 125);
   digitalWrite(MD_IN_3, HIGH);
   digitalWrite(MD_IN_4, LOW);
   Serial.println("Creep Forward");
@@ -29,7 +29,7 @@ void handleCreepForward()
 
 void handleReverse()
 {
-  digitalWrite(MD_ENABLE, HIGH);
+  analogWrite(MD_ENABLE, 250);
   digitalWrite(MD_IN_3, LOW);
   digitalWrite(MD_IN_4, HIGH);
   Serial.println("Reverse");
@@ -37,7 +37,7 @@ void handleReverse()
 
 void handleCreepReverse()
 {
-  digitalWrite(MD_ENABLE, HIGH);
+  analogWrite(MD_ENABLE, 125);
   digitalWrite(MD_IN_3, LOW);
   digitalWrite(MD_IN_4, HIGH);
   Serial.println("Creep Reverse");
@@ -51,273 +51,140 @@ void handleStopAcceleration()
   Serial.println("Stop Acceleration");
 }
 
-void elevateTurret(void* pvParameters)
-{
-  while(_turret_elevation_postion < 170)
-   {    
-    if(_can_elevate)
-    {
-      elevation_servo.write(_turret_elevation_postion+1);
-      _turret_elevation_postion++;
-      Serial.println("_turret_elevation = " + String(_turret_elevation_postion));
-    }
-    delay(20);
-   }
-    _elevate_turret_task = NULL;
-   vTaskDelete(NULL);
-}
-
-void slowElevateTurret(void* pvParameters)
-{
-  while(_turret_elevation_postion < 170)
-   {    
-    if(_can_elevate)
-      {
-      elevation_servo.write(_turret_elevation_postion+1);
-      _turret_elevation_postion++;
-      Serial.println("_turret_elevation = " + String(_turret_elevation_postion));
-      }
-    delay(200);
-   }
-    _elevate_turret_task = NULL;
-   vTaskDelete(NULL);
-}
-
-void depressTurret(void* pvParameters)
-{
-  while(_turret_elevation_postion > 10)
-   {
-    if(_can_elevate)
-    {
-    elevation_servo.write(_turret_elevation_postion-1);
-    _turret_elevation_postion--;
-    Serial.println("_turret_elevation = " + String(_turret_elevation_postion));
-    }
-    delay(20);
-   }
-   _elevate_turret_task = NULL;
-   vTaskDelete(NULL);
-}
-
-void slowDepressTurret(void* pvParameters)
-{
-  while(_turret_elevation_postion > 10)
-   {
-    if(_can_elevate)
-    {
-    elevation_servo.write(_turret_elevation_postion-1);
-    _turret_elevation_postion--;
-    Serial.println("_turret_elevation = " + String(_turret_elevation_postion));
-    }
-    delay(200);
-   }
-   _elevate_turret_task = NULL;
-   vTaskDelete(NULL);
-}
-
-void handleElevateTurret()
+void handleElevateTurret10()
 { 
-  _can_elevate = true;
-
-   xTaskCreatePinnedToCore(
-                    elevateTurret,   /* Task function. */
-                    "ElevateTurretTasks",     /* name of task. */
-                    10000,       /* Stack size of task */
-                    NULL,        /* parameter of the task */
-                    3,           /* priority of the task */
-                    &_elevate_turret_task,      /* Task handle to keep track of created task */
-                    1); 
-  Serial.println("Elevate Turret");
+  if(_turret_elevation_postion < 175)
+  {
+      elevation_servo.write(_turret_elevation_postion+10);
+      _turret_elevation_postion+=10;
+      Serial.println("_turret_elevation = " + String(_turret_elevation_postion));
+   }
+  Serial.println("Elevate Turret 10");
 }
 
-void handleSlowElevateTurret()
-{
-   _can_elevate = true;
-
-   xTaskCreatePinnedToCore(
-                    slowElevateTurret,   /* Task function. */
-                    "SlowElevateTurretTasks",     /* name of task. */
-                    10000,       /* Stack size of task */
-                    NULL,        /* parameter of the task */
-                    1,           /* priority of the task */
-                    &_elevate_turret_task,      /* Task handle to keep track of created task */
-                    1); 
-  Serial.println("Slow Elevate Turret");
+void handleElevateTurret5()
+{ 
+   if(_turret_elevation_postion < 175)
+  {
+  elevation_servo.write(_turret_elevation_postion+5);
+  _turret_elevation_postion+=5;
+  Serial.println("_turret_elevation = " + String(_turret_elevation_postion));
+  }
+  Serial.println("Elevate Turret 5 ");
 }
 
-void handleDepressTurret()
+void handleElevateTurret1()
+{ 
+  if(_turret_elevation_postion < 175)
+  {
+    elevation_servo.write(_turret_elevation_postion+1);
+    _turret_elevation_postion++;
+    Serial.println("_turret_elevation = " + String(_turret_elevation_postion));
+  } 
+  Serial.println("Elevate Turret 1");
+}
+
+void handleDepressTurret10()
 {     
-    _can_elevate = true;
-
-    xTaskCreatePinnedToCore(
-                    depressTurret,   /* Task function. */
-                    "DepressTurretTasks",     /* name of task. */
-                    10000,       /* Stack size of task */
-                    NULL,        /* parameter of the task */
-                    3,           /* priority of the task */
-                    &_elevate_turret_task,      /* Task handle to keep track of created task */
-                    1); 
-    Serial.println("Depress Turret");
+  if(_turret_elevation_postion > 20 )
+  {
+  elevation_servo.write(_turret_elevation_postion-10);
+  _turret_elevation_postion-=10;
+  Serial.println("_turret_elevation = " + String(_turret_elevation_postion));
+  }
+  Serial.println("Depress Turret 10");
 }
 
-void handleSlowDepressTurret()
-{   
-    _can_elevate = true;
-
-    xTaskCreatePinnedToCore(
-                    slowDepressTurret,   /* Task function. */
-                    "SlowDepressTurretTasks",     /* name of task. */
-                    10000,       /* Stack size of task */
-                    NULL,        /* parameter of the task */
-                    1,           /* priority of the task */
-                    &_elevate_turret_task,      /* Task handle to keep track of created task */
-                    1); 
-    Serial.println("Slow Depress Turret");
+void handleDepressTurret5()
+{     
+     if(_turret_elevation_postion > 20 )
+  {
+  elevation_servo.write(_turret_elevation_postion-5);
+  _turret_elevation_postion-=5;
+  Serial.println("_turret_elevation = " + String(_turret_elevation_postion));
+  }
+  Serial.println("Depress Turret 5");
 }
 
-void handleStopTurretElevationChange()
+void handleDepressTurret1()
+{     
+     if(_turret_elevation_postion > 20 )
+  {
+    elevation_servo.write(_turret_elevation_postion-1);
+    _turret_elevation_postion--;
+    Serial.println("_turret_elevation = " + String(_turret_elevation_postion));
+  }
+    Serial.println("Depress Turret 1");
+}
+
+void handleTraverseTurretAnticlockwise10()
 {
-  _can_elevate = false;
-
-   if(_elevate_turret_task != NULL) 
-   {
-    vTaskDelete(_elevate_turret_task);
-   }
-  Serial.println("Stop Turret Elevation Change");
-}
-
-void traverseTurretClockwise(void* pvParameters)
-{
-  while(_turret_traverse_postion < 170)
-   {    
-    if(_can_traverse)
+  if(_turret_traverse_postion>10)
     {
-    traverse_servo.write(_turret_traverse_postion+1);    
-    _turret_traverse_postion++;
+    traverse_servo.write(_turret_traverse_postion-10);
+    _turret_traverse_postion-=10;
     Serial.println("_turret_traverse_position = " + String(_turret_traverse_postion));
     }
-    delay(10);
-   }
-    
-    _traverse_turret_task = NULL;
-    vTaskDelete(NULL);  
+  Serial.println("Traverse Turret Anticlockwise 10");
 }
 
-void slowTraverseTurretClockwise(void* pvParameters)
+void handleTraverseTurretAnticlockwise5()
 {
-  while(_turret_traverse_postion < 170)
-   {    
-    if(_can_traverse)
+  if(_turret_traverse_postion>10)
     {
-    traverse_servo.write(_turret_traverse_postion+1);    
-    _turret_traverse_postion++;
+    traverse_servo.write(_turret_traverse_postion-5);
+    _turret_traverse_postion-=5;
     Serial.println("_turret_traverse_position = " + String(_turret_traverse_postion));
     }
-    delay(200);
-   }
-    
-    _traverse_turret_task = NULL;
-    vTaskDelete(NULL);  
+  Serial.println("Traverse Turret Anticlockwise 5");
 }
 
-void traverseTurretAntiClockwise(void* pvParameters)
+void handleTraverseTurretAnticlockwise1()
 {
-  while(_turret_traverse_postion > 10)
-   {
-    if(_can_traverse)
+  if(_turret_traverse_postion>10)
     {
     traverse_servo.write(_turret_traverse_postion-1);
     _turret_traverse_postion--;
     Serial.println("_turret_traverse_position = " + String(_turret_traverse_postion));
     }
-    delay(10);
-   }
-
-   _traverse_turret_task = NULL;   
-   vTaskDelete(NULL);   
+  Serial.println("Traverse Turret Anticlockwise 1");
 }
 
-void slowTraverseTurretAntiClockwise(void* pvParameters)
+
+void handleTraverseTurretClockwise10()
 {
-  while(_turret_traverse_postion > 10)
-   {
-    if(_can_traverse)
+  if(_turret_traverse_postion < 170)
     {
-    traverse_servo.write(_turret_traverse_postion-1);
-    _turret_traverse_postion--;
-    Serial.println("_turret_traverse_position = " + String(_turret_traverse_postion));
+    traverse_servo.write(_turret_traverse_postion+10);    
+    _turret_traverse_postion+=10;
+    Serial.
+    println("_turret_traverse_position = " + String(_turret_traverse_postion));
     }
-    delay(200);
-   }
-
-   _traverse_turret_task = NULL;   
-   vTaskDelete(NULL);   
+  Serial.println("Traverse Turret Clockwise 10");
 }
 
-void handleTraverseTurretAnticlockwise()
+void handleTraverseTurretClockwise5()
 {
-  _can_traverse = true;
-   xTaskCreatePinnedToCore(
-                    traverseTurretAntiClockwise,   /* Task function. */
-                    "TraverseTurretTask",     /* name of task. */
-                    10000,       /* Stack size of task */
-                    NULL,        /* parameter of the task */
-                    1,           /* priority of the task */
-                    &_traverse_turret_task,      /* Task handle to keep track of created task */
-                    0); 
-  Serial.println("Traverse Turret Anticlockwise");
+  if(_turret_traverse_postion < 170)
+    {
+    traverse_servo.write(_turret_traverse_postion+5);    
+    _turret_traverse_postion+=5;
+    Serial.
+    println("_turret_traverse_position = " + String(_turret_traverse_postion));
+    }
+  Serial.println("Traverse Turret Clockwise 5 ");
 }
 
-void handleSlowTraverseTurretAnticlockwise()
+void handleTraverseTurretClockwise1()
 {
-  _can_traverse = true;
-   xTaskCreatePinnedToCore(
-                    slowTraverseTurretAntiClockwise,   /* Task function. */
-                    "SlowTraverseTurretTask",     /* name of task. */
-                    10000,       /* Stack size of task */
-                    NULL,        /* parameter of the task */
-                    1,           /* priority of the task */
-                    &_traverse_turret_task,      /* Task handle to keep track of created task */
-                    1); 
-  Serial.println("Slow Traverse Turret Anticlockwise");
-}
-
-void handleTraverseTurretClockwise()
-{
-  _can_traverse = true;
-  xTaskCreatePinnedToCore(
-                    traverseTurretClockwise,   /* Task function. */
-                    "TraverseTurretTask",     /* name of task. */
-                    10000,       /* Stack size of task */
-                    NULL,        /* parameter of the task */
-                    3,           /* priority of the task */
-                    &_traverse_turret_task,      /* Task handle to keep track of created task */
-                    1); 
-  Serial.println("Traverse Turret Clockwise");
-}
-
-void handleSlowTraverseTurretClockwise()
-{
-  _can_traverse = true;
-  xTaskCreatePinnedToCore(
-                    slowTraverseTurretClockwise,   /* Task function. */
-                    "SlowTraverseTurretTask",     /* name of task. */
-                    10000,       /* Stack size of task */
-                    NULL,        /* parameter of the task */
-                    1,           /* priority of the task */
-                    &_traverse_turret_task,      /* Task handle to keep track of created task */
-                    1); 
-  Serial.println("Traverse Turret Clockwise");
-}
-
-void handleStopTurretTraverseChange()
-{
-  _can_traverse = false;
-  if(_traverse_turret_task != NULL) 
-   {
-    vTaskDelete(_traverse_turret_task);
-   }
-  Serial.println("Stop Turret Traverse Change");
+  if(_turret_traverse_postion < 170)
+    {
+    traverse_servo.write(_turret_traverse_postion+1);    
+    _turret_traverse_postion++;
+    Serial.
+    println("_turret_traverse_position = " + String(_turret_traverse_postion));
+    }
+  Serial.println("Traverse Turret Clockwise 1 ");
 }
 
 void handleLinearActuatorUp()
@@ -456,8 +323,6 @@ void handleLaserOff()
 void handleStopAll()
 {
     handleStopAcceleration();
-    handleStopTurretElevationChange();
-    handleStopTurretTraverseChange();
     handleWaterStop();
     handleLinearActuatorStop();
 }

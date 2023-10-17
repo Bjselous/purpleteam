@@ -126,46 +126,52 @@ void processMovementCommand(String inputValue)
         handleStopAcceleration();
       break;
   
-    case ELEVATE_TURRET:
-        handleElevateTurret();
+    case ELEVATE_TURRET_10:
+        handleElevateTurret10();
       break;
-
-    case SLOW_ELEVATE_TURRET:
-        handleSlowElevateTurret();
+     case ELEVATE_TURRET_5:
+        handleElevateTurret5();
       break;
-  
-    case DEPRESS_TURRET:
-        handleDepressTurret();
-      break;
-
-    case SLOW_DEPRESS_TURRET:
-        handleSlowDepressTurret();
-      break;
-  
-    case STOP_TURRET_ELEVATION_CHANGE:
-        handleStopTurretElevationChange();
-      break;
-  
-    case TRAVERSE_TURRET_ANTICLOCKWISE:
-        handleTraverseTurretAnticlockwise();
+     case ELEVATE_TURRET_1:
+        handleElevateTurret1();
       break;
      
-    case TRAVERSE_TURRET_CLOCKWISE:
-        handleTraverseTurretClockwise();  
+    case DEPRESS_TURRET_10:
+        handleDepressTurret10();
       break;
 
-      case SLOW_TRAVERSE_TURRET_CLOCKWISE:
-        handleSlowTraverseTurretClockwise();
+    case DEPRESS_TURRET_5:
+        handleDepressTurret5();
+      break;
+    
+    case DEPRESS_TURRET_1:
+        handleDepressTurret1();
+      break;
+  
+    case TRAVERSE_TURRET_ANTICLOCKWISE_10:
+        handleTraverseTurretAnticlockwise10();
       break;
 
-      case SLOW_TRAVERSE_TURRET_ANTICLOCKWISE:
-        handleSlowTraverseTurretAnticlockwise();
+    case TRAVERSE_TURRET_ANTICLOCKWISE_5:
+        handleTraverseTurretAnticlockwise5();
       break;
-  
-    case STOP_TURRET_TRAVERSE_CHANGE:
-        handleStopTurretTraverseChange();
+
+    case TRAVERSE_TURRET_ANTICLOCKWISE_1:
+        handleTraverseTurretAnticlockwise1();
       break;
-  
+     
+    case TRAVERSE_TURRET_CLOCKWISE_10:
+        handleTraverseTurretClockwise10();  
+      break;
+
+    case TRAVERSE_TURRET_CLOCKWISE_5:
+        handleTraverseTurretClockwise5();  
+      break;
+
+    case TRAVERSE_TURRET_CLOCKWISE_1:
+        handleTraverseTurretClockwise1();  
+      break;
+    
     case WATER_START:
         handleWaterStart();  
       break;

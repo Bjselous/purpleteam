@@ -14,15 +14,14 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
       font-size:2em;
       color:black;
     }
+    .heading {
+      font-size:2em;
+      color:black;
+    }
     .empty {
         display: inline-block;
         min-height : 2em;
         color:red;
-    }
-    .circularArrows {
-      font-size:2em;
-      font-weight:bold;
-      color:black;
     }
     .waterSymbols {
       font-size:2em;
@@ -33,6 +32,11 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
       border-radius:25%;
       border-color:dark-purple;
       border-width: 2px;
+      width: 50px;
+    }
+    td
+    {
+      min-width:50px;
     }
     td:active {
       transform: translate(5px,5px);
@@ -80,15 +84,22 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
     </script>
 
   </head>
+
   <body class="noselect" align="center" style="background-color:purple">
          
-    <table id="mainTable" style="width:400px;margin:auto;table-layout:fixed" CELLSPACING=10>
+    <table id="driveTable" style="min-width:400px; margin:10px auto;table-layout:fixed; border: 1px solid black; border-radius: 10px;" CELLSPACING=10>
 
-      <tr>
+        <tr>
+            <td></td>
+            <td colspan="3"><span class="heading">Drive<span></td>
+            <td></td>
+        </tr>
+
+        <tr>
             <td></td>
             <td></td>
             <!-- Creep Forward -->
-            <td onmousedown='onTouchStartAndEnd("15")' ontouchstart='onTouchStartAndEnd("15")' onmouseup='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("3")' class="button"><span class="driveArrows" >&#8679;</span></td>
+            <td onmousedown='onTouchStartAndEnd("15")' ontouchstart='onTouchStartAndEnd("15")' onmouseup='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("3")' class="button"><span class="driveArrows" >&#8593;</span></td>
             <td></td>
             <td></td>
         </tr>
@@ -97,7 +108,7 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
             <td></td>
             <td></td>
             <!-- Forward -->
-            <td onmousedown='onTouchStartAndEnd("1")' ontouchstart='onTouchStartAndEnd("1")' onmouseup='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("3")' class="button"><span class="driveArrows" >&#8679;</span></td>
+            <td onmousedown='onTouchStartAndEnd("1")' ontouchstart='onTouchStartAndEnd("1")' onmouseup='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("3")' class="button"><span class="driveArrows" >&#8648;</span></td>
             <td></td>
             <td></td>
         </tr>
@@ -106,7 +117,7 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
             <td></td>
             <td></td>
             <!-- Backwards -->
-            <td onmousedown='onTouchStartAndEnd("2")' ontouchstart='onTouchStartAndEnd("2")' onmouseup='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("3")' class="button"><span class="driveArrows" >&#8681;</span></td>
+            <td onmousedown='onTouchStartAndEnd("2")' ontouchstart='onTouchStartAndEnd("2")' onmouseup='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("3")' class="button"><span class="driveArrows" >&#8650;</span></td>
             <td></td>
             <td></td>
         </tr>
@@ -115,54 +126,78 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
             <td></td>
             <td></td>
             <!-- Creep Backwards -->
-            <td onmousedown='onTouchStartAndEnd("16")' ontouchstart='onTouchStartAndEnd("16")' onmouseup='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("3")' class="button"><span class="driveArrows" >&#8681;</span></td>
+            <td onmousedown='onTouchStartAndEnd("16")' ontouchstart='onTouchStartAndEnd("16")' onmouseup='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("3")' class="button"><span class="driveArrows" >&#8595;</span></td>
             <td></td>
             <td></td>
         </tr>
+      
+    </table>
     
+    <table id="turretTable" style="min-width:400px; margin:auto;table-layout:fixed; border: 1px solid black; border-radius: 10px;" CELLSPACING=2>
+
         <tr>
-            <td><span class="empty" ></span></td>
-            <td><span class="empty" ></span></td>    
-            <td><span class="empty" ></span></td>
-            <td><span class="empty" ></span></td>    
-            <td><span class="empty" ></span></td>
+            <td></td>
+            <td></td>
+            <td colspan="3"><span class="heading">Turret</span></td>
+            <td></td>
+            <td></td>
         </tr>
 
         <tr>
+            <td></td>
             <td onmousedown='onTouchStartAndEnd("21")' ontouchstart='onTouchStartAndEnd("21")' class="button"><span class="turretArrows" >ON</span></td>
             <td></td>
-            <!-- Slow Elevate Turret -->
-            <td onmousedown='onTouchStartAndEnd("17")' ontouchstart='onTouchStartAndEnd("17")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8679;</span></td>
+            <!--Elevate Turret 1-->
+            <td onmousedown='onTouchStartAndEnd("18")' ontouchstart='onTouchStartAndEnd("18")' class="button"><span class="turretArrows" >1</span></td>
             <td></td>
             <td onmousedown='onTouchStartAndEnd("22")' ontouchstart='onTouchStartAndEnd("22")' class="button"><span class="turretArrows" >OFF</span></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <!--Elevate Turret 5-->
+            <td onmousedown='onTouchStartAndEnd("17")' ontouchstart='onTouchStartAndEnd("17")' class="button"><span class="turretArrows" >5</span></td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
 
          <tr>
             <td></td>
             <td></td>
-            <!-- Elevate Turret -->
-            <td onmousedown='onTouchStartAndEnd("4")' ontouchstart='onTouchStartAndEnd("4")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8679;</span></td>
+            <td></td>
+            <!--Elevate Turret 10-->
+            <td onmousedown='onTouchStartAndEnd("4")' ontouchstart='onTouchStartAndEnd("4")' class="button"><span class="turretArrows" >10</span></td>
+            <td></td>
             <td></td>
             <td></td>
         </tr>
 
         <tr>
-            <!-- SLOW TRAVERSE TURRET ANTICLOCKWISE -->
-            <td onmousedown='onTouchStartAndEnd("19")' ontouchstart='onTouchStartAndEnd("19")' onmouseup='onTouchStartAndEnd("9")' ontouchend='onTouchStartAndEnd("9")' class="button"><span class="circularArrows" >&#8634;</span></td>
+            <td onmousedown='onTouchStartAndEnd("20")' ontouchstart='onTouchStartAndEnd("20")' class="button"><span class="turretArrows" >1</span></td>
             <!-- TRAVERSE TURRET ANTICLOCKWISE -->
-            <td onmousedown='onTouchStartAndEnd("7")' ontouchstart='onTouchStartAndEnd("7")' onmouseup='onTouchStartAndEnd("9")' ontouchend='onTouchStartAndEnd("9")' class="button"><span class="circularArrows" >&#8634;</span></td>
+            <td onmousedown='onTouchStartAndEnd("19")' ontouchstart='onTouchStartAndEnd("19")' class="button"><span class="turretArrows" >5</span></td>
+            <!-- TRAVERSE TURRET ANTICLOCKWISE -->
+            <td onmousedown='onTouchStartAndEnd("8")' ontouchstart='onTouchStartAndEnd("8")' class="button"><span class="turretArrows" >10</span></td>
             <td></td>
             <!-- TRAVERSE TURRET CLOCKWISE -->
-            <td onmousedown='onTouchStartAndEnd("8")' ontouchstart='onTouchStartAndEnd("8")' onmouseup='onTouchStartAndEnd("9")' ontouchend='onTouchStartAndEnd("9")' class="button"><span class="circularArrows" >&#8635;</span></td>
+            <td onmousedown='onTouchStartAndEnd("7")' ontouchstart='onTouchStartAndEnd("7")' class="button"><span class="turretArrows" >10</span></td>
             <!-- SLOW TRAVERSE TURRET CLOCKWISE -->
-            <td onmousedown='onTouchStartAndEnd("20")' ontouchstart='onTouchStartAndEnd("20")' onmouseup='onTouchStartAndEnd("9")' ontouchend='onTouchStartAndEnd("9")' class="button"><span class="circularArrows" >&#8635;</span></td>
+            <td onmousedown='onTouchStartAndEnd("28")' ontouchstart='onTouchStartAndEnd("28")' class="button"><span class="turretArrows" >5</span></td>
+
+            <td onmousedown='onTouchStartAndEnd("29")' ontouchstart='onTouchStartAndEnd("29")' class="button"><span class="turretArrows" >1</span></td>
         </tr>
 
         <tr>
             <td></td>
             <td></td>
-            <!-- Depress Turret -->
-            <td onmousedown='onTouchStartAndEnd("5")' ontouchstart='onTouchStartAndEnd("5")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8681;</span></td>
+            <td></td>
+            <!-- Depress Turret 10-->
+            <td onmousedown='onTouchStartAndEnd("27")' ontouchstart='onTouchStartAndEnd("27")' class="button"><span class="turretArrows" >10</span></td>
+            <td></td>
             <td></td>
             <td></td>
         </tr>
@@ -170,18 +205,35 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
         <tr>
             <td></td>
             <td></td>
-            <!-- Slow Depress Turret -->
-            <td onmousedown='onTouchStartAndEnd("18")' ontouchstart='onTouchStartAndEnd("18")' onmouseup='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("6")' class="button"><span class="turretArrows" >&#8681;</span></td>
+            <td></td>
+            <!-- Depress Turret 5-->
+            <td onmousedown='onTouchStartAndEnd("26")' ontouchstart='onTouchStartAndEnd("26")' class="button"><span class="turretArrows" >5</span></td>
+            <td></td>
             <td></td>
             <td></td>
         </tr>
 
         <tr>
-            <td><span class="empty" ></span></td>
-            <td><span class="empty" ></span></td>    
-            <td><span class="empty" ></span></td>
-            <td><span class="empty" ></span></td>    
-            <td><span class="empty" ></span></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <!-- Depress Turret 1-->
+            <td onmousedown='onTouchStartAndEnd("5")' ontouchstart='onTouchStartAndEnd("5")' class="button"><span class="turretArrows" >1</span></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+      
+    </table>
+
+    <table id="actuatorTable" style="min-width:400px; margin:10px auto;table-layout:fixed; border: 1px solid black; border-radius: 10px;" CELLSPACING=10>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td><span class="heading">Actuator</span></td>
+            <td></td>
+            <td></td>
         </tr>
 
         <tr>
@@ -202,12 +254,14 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
             <td></td>
         </tr>
 
+       </table>
+
+    <table id="pumpTable" style="min-width:400px; margin:10px auto;table-layout:fixed; border: 1px solid black; border-radius: 10px;" CELLSPACING=10>
+
         <tr>
-            <td><span class="empty"></span></td>
-            <td><span class="empty"></span></td>    
-            <td><span class="empty"></span></td>
-            <td><span class="empty"></span></td>    
-            <td><span class="empty"></span></td>
+            <td></td>
+            <td colspan="3"><span class="heading">Pump</span></td>
+            <td></td>
         </tr>
 
         <tr>
@@ -236,7 +290,19 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
         console.log("disable default event listener");
         console.log("");
 
-        document.getElementById("mainTable").addEventListener("touchend", function(event){
+        document.getElementById("driveTable").addEventListener("touchend", function(event){
+                event.preventDefault()
+            });
+
+        document.getElementById("turretTable").addEventListener("touchend", function(event){
+                event.preventDefault()
+            });
+
+        document.getElementById("actuatorTable").addEventListener("touchend", function(event){
+                event.preventDefault()
+            });
+
+        document.getElementById("pumpTable").addEventListener("touchend", function(event){
                 event.preventDefault()
             });
 
@@ -249,5 +315,4 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
     
   </body>
 </html> 
-
 )HTMLHOMEPAGE";
