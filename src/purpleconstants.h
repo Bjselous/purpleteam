@@ -1,3 +1,7 @@
+// Orginal code by Bryan Saunders 18/10/23
+// Developed for Team Purple ENGG1100 Semester 2 2023
+// Any Duplication or distribution is prohibted
+
 #ifndef PURPLE_CONSTANTS
 #define PURPLE_CONSTANTS
 
@@ -33,9 +37,12 @@
 #define LINEAR_ACTUATOR_UP 12
 #define LINEAR_ACTUATOR_DOWN 13
 #define LINEAR_ACTUATOR_STOP 14
+#define LINEAR_ACTUATOR_FULL_UP 30
+#define LINEAR_ACTUATOR_FULL_DOWN 31
 
-#define LASER_ON 21
-#define LASER_OFF 22
+
+#define LEFT_TGT 21
+#define RIGHT_TGT 22
 
 // WiFi network name and password:
 const char * networkName = "PurpleT";
@@ -53,13 +60,18 @@ const int MD_ENABLE = 12;
 const int MD_IN_3 = 25;
 const int MD_IN_4 = 13;
 
-
 const int LA_ENABLE = 05;
 const int LA_IN_1 = 18;
 const int LA_IN_2 = 19;
 
-const int LASER_PIN = 23;
+
+const int RMD_ENABLE = 23;
+const int RMD_IN_3 = 22;
+const int RMD_IN_4 =21;
 
 bool fwd = false;
+
+const int PUMP_ON_DURATION = 750;
+const int PUMP_PAUSE_DURATION = 750;
 
 #endif

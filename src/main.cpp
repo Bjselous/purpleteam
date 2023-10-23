@@ -1,3 +1,7 @@
+// Orginal code by Bryan Saunders 18/10/23
+// Developed for Team Purple ENGG1100 Semester 2 2023
+// Any Duplication or distribution is prohibted
+
 #include <Arduino.h>
 #include <WiFi.h>
 #include <DNSServer.h>
@@ -13,7 +17,7 @@
 // Set web server port number to 80
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
-IPAddress local_IP(192,168,201,200);
+IPAddress local_IP(192,168,249,214);
 IPAddress gateway(192, 168, 1, 4);
 IPAddress subnet(255, 255, 255, 0);
 IPAddress primaryDNS(8, 8, 8, 8); 
@@ -25,25 +29,12 @@ IPAddress secondaryDNS(8, 8, 4, 4);
 void connectToWiFi(const char * ssid, const char * pwd)
 {
     
-  //  Serial.println("Scanning WIFI Network: " + String(ssid));
-  //  int numberOfNetworks = WiFi.scanNetworks(); 
-  //  Serial.println("Number of networks dount: " + String(numberOfNetworks));
-  
-  // for(int i =0; i<numberOfNetworks; i++)
-  // { 
-  //     Serial.print("Network name: ");
-  //     Serial.println(WiFi.SSID(i));
-  //     Serial.print("Signal strength: ");
-  //     Serial.println(WiFi.RSSI(i));
-  //     Serial.println("-----------------------"); 
-  // }
-  
   Serial.println("Connecting to WiFi network: " + String(ssid));
 
   //set up static IP address so that we can enter known ip addresses on devices 
-  if(!WiFi.config(local_IP, gateway, subnet, primaryDNS, secondaryDNS)) 
+  if(!WiFi.config(local_IP, gateway, subnet, primaryDNS, secondaryDNS))
   {
-    Serial.println("STA Failed to configure");
+   Serial.println("STA Failed to configure");
   }
 
   WiFi.begin(ssid, pwd);
@@ -52,10 +43,7 @@ void connectToWiFi(const char * ssid, const char * pwd)
 
   while (WiFi.status() != WL_CONNECTED) 
   {
-    // Blink LED while we're connecting:
-    //digitalWrite(GREENLED_PIN, HIGH);
-    delay(500);
-    //digitalWrite(GREENLED_PIN, LOW);
+      
     delay(500);
     Serial.println(WiFi.status());
     connectionAttemptCycles++;
@@ -63,8 +51,7 @@ void connectToWiFi(const char * ssid, const char * pwd)
     //If we havent connected in 5 cycles restart
     if(connectionAttemptCycles>5)
     {
-      //digitalWrite(REDLED_PIN, LOW);
-      //digitalWrite(GREENLED_PIN, LOW);
+    
       Serial.println("Restarting ESP");
       Serial.println();
       Serial.println();
@@ -72,9 +59,6 @@ void connectToWiFi(const char * ssid, const char * pwd)
       ESP.restart();
     }
   }
-
-  //digitalWrite(GREENLED_PIN, HIGH);
-  //digitalWrite(REDLED_PIN, LOW);
 
   Serial.println();
   Serial.println("WiFi connected!");
@@ -86,6 +70,7 @@ void connectToWiFi(const char * ssid, const char * pwd)
 /// @param request 
 void displayRoot(AsyncWebServerRequest *request) 
 {
+  Serial.println("Request for root");
   request->send_P(200, "text/html", htmlHomePage);
 }
 
@@ -129,9 +114,11 @@ void processMovementCommand(String inputValue)
     case ELEVATE_TURRET_10:
         handleElevateTurret10();
       break;
+
      case ELEVATE_TURRET_5:
         handleElevateTurret5();
       break;
+
      case ELEVATE_TURRET_1:
         handleElevateTurret1();
       break;
@@ -200,16 +187,24 @@ void processMovementCommand(String inputValue)
         handleLinearActuatorDown();      
       break;
 
+    case LINEAR_ACTUATOR_FULL_UP:
+        handleLinearActuatorFullUp();      
+      break;
+  
+    case LINEAR_ACTUATOR_FULL_DOWN:
+        handleLinearActuatorFullDown();      
+      break;
+
     case LINEAR_ACTUATOR_STOP:
         handleLinearActuatorStop();      
       break;
 
-    case LASER_ON:
-        handleLaserOn();      
+    case LEFT_TGT:
+        handleLeftTGT();      
       break;
 
-    case LASER_OFF:
-        handleLaserOff();      
+    case RIGHT_TGT:
+        handleRightTGT();      
       break;
 
     default:
@@ -261,6 +256,10 @@ void setup()
   pinMode(MD_IN_3, OUTPUT);
   pinMode(MD_IN_4, OUTPUT);
 
+  pinMode(RMD_ENABLE, OUTPUT);
+  pinMode(RMD_IN_3, OUTPUT);
+  pinMode(RMD_IN_4, OUTPUT);
+
   pinMode(PD_ENABLE, OUTPUT);
   pinMode(PD_IN_1, OUTPUT);
   pinMode(PD_IN_2, OUTPUT);
@@ -268,10 +267,7 @@ void setup()
   pinMode(LA_ENABLE, OUTPUT);
   pinMode(LA_IN_1, OUTPUT);
   pinMode(LA_IN_2, OUTPUT);
-
-  pinMode(LASER_PIN, OUTPUT);
-  digitalWrite(LASER_PIN, LOW);
-
+ 
   digitalWrite(LA_IN_1, LOW);
   digitalWrite(LA_IN_2, LOW);
 
@@ -297,7 +293,7 @@ void setup()
 	ESP32PWM::allocateTimer(1);
 	ESP32PWM::allocateTimer(2);
 	ESP32PWM::allocateTimer(3);
-	elevation_servo.setPeriodHertz(50);    // standard 50 hz servo
+	elevation_servo.setPeriodHertz(40);    // standard 50 hz servo
   elevation_servo.attach(SERVO_ELEVATION_PIN,500, 2400);
   elevation_servo.write(90);
   delay(20);
@@ -307,6 +303,7 @@ void setup()
   delay(20);
 
   Serial.println("Setup() Complete");
+  handleStopAcceleration();
 }
 
 void loop() 

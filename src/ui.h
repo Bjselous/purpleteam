@@ -1,3 +1,7 @@
+// Orginal code by Bryan Saunders 18/10/23
+// Developed for Team Purple ENGG1100 Semester 2 2023
+// Any Duplication or distribution is prohibted
+
 #include <Arduino.h>
 
 const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
@@ -145,12 +149,12 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
 
         <tr>
             <td></td>
-            <td onmousedown='onTouchStartAndEnd("21")' ontouchstart='onTouchStartAndEnd("21")' class="button"><span class="turretArrows" >ON</span></td>
+            <td onmousedown='onTouchStartAndEnd("21")' ontouchstart='onTouchStartAndEnd("21")' class="button"><span class="turretArrows" >L</span></td>
             <td></td>
             <!--Elevate Turret 1-->
             <td onmousedown='onTouchStartAndEnd("18")' ontouchstart='onTouchStartAndEnd("18")' class="button"><span class="turretArrows" >1</span></td>
             <td></td>
-            <td onmousedown='onTouchStartAndEnd("22")' ontouchstart='onTouchStartAndEnd("22")' class="button"><span class="turretArrows" >OFF</span></td>
+            <td onmousedown='onTouchStartAndEnd("22")' ontouchstart='onTouchStartAndEnd("22")' class="button"><span class="turretArrows" >R</span></td>
             <td></td>
         </tr>
 
@@ -238,19 +242,17 @@ const char* htmlHomePage PROGMEM = R"HTMLHOMEPAGE(
 
         <tr>
             <td></td>
-            <td></td>
-            <!-- Linear Actuator Up -->
             <td onmousedown='onTouchStartAndEnd("12")' ontouchstart='onTouchStartAndEnd("12")' onmouseup='onTouchStartAndEnd("14")' ontouchend='onTouchStartAndEnd("14")' class="button"><span class="driveArrows" >&#8679;</span></td>
             <td></td>
+            <td onmousedown='onTouchStartAndEnd("30")' ontouchstart='onTouchStartAndEnd("30")' class="button"><span class="driveArrows" >&#8679;</span></td>
             <td></td>
         </tr>
             
         <tr>
             <td></td>
-            <td></td>
-             <!-- Linear Actuator Down -->
             <td onmousedown='onTouchStartAndEnd("13")' ontouchstart='onTouchStartAndEnd("13")' onmouseup='onTouchStartAndEnd("14")' ontouchend='onTouchStartAndEnd("14")' class="button"><span class="driveArrows" >&#8681;</span></td>
             <td></td>
+            <td onmousedown='onTouchStartAndEnd("31")' ontouchstart='onTouchStartAndEnd("31")' class="button"><span class="driveArrows" >&#8681;</span></td>
             <td></td>
         </tr>
 
